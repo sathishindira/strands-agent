@@ -1,0 +1,10 @@
+strands-agents
+strands-agents-tools
+mcp
+streamlit
+boto3
+diagrams
+wheel
+setuptools
+sarif-om
+repomix>=0.2.6
