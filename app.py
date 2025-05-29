@@ -1,14 +1,10 @@
 import streamlit as st
 from cloud_engineer_agent import execute_predefined_task, execute_custom_task, get_predefined_tasks, PREDEFINED_TASKS
-import time
 import re
-import json
 import ast
 import os
-import shutil
 from PIL import Image
 import logging
-from datetime import datetime
 from fix_diagram_paths import fix_diagram_paths
 
 # Set up logging

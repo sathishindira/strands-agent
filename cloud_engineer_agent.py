@@ -4,13 +4,10 @@ from strands.models import BedrockModel
 from mcp import StdioServerParameters, stdio_client
 from strands_tools import editor, file_read, file_write, shell, python_repl, http_request, image_reader, generate_image, speak, calculator, current_time, load_tool, swarm
 from tools.use_aws_sts import use_aws_sts
-import threading
 import logging
 import os
 import atexit
 from typing import Dict, Optional, Any, List
-import boto3
-from botocore.config import Config
 from botocore.exceptions import ClientError, ConnectTimeoutError, ReadTimeoutError
 
 # Set up logging
@@ -431,12 +428,12 @@ def execute_custom_task(task_description: str, model_name: Optional[str] = None,
         except ClientError as e:
             error_code = e.response.get('Error', {}).get('Code', 'Unknown')
             error_msg = f"AWS Client Error ({error_code}): {str(e)}"
-            logger.error(error_msg, exc_info=True)
+            logger.error(error_msg)
             return error_msg
             
         except Exception as e:
             last_exception = e
-            logger.error(f"Unexpected error on attempt {attempt + 1}: {str(e)}", exc_info=True)
+            logger.error(f"Unexpected error on attempt {attempt + 1}: {str(e)}")
             if attempt == max_retries - 1:
                 return f"Error: {str(last_exception)}"
     
